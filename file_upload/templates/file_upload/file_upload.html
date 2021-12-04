@@ -1,0 +1,12 @@
+{% extends 'file_upload/base.html' %}
+{% load i18n %}
+{% load l10n %}
+{% block content %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% trans 'Upload' %}</button>
+  </form>
+
+  <p><a href="{% url 'file_upload:home' %}">{% trans 'Return to home' %}</a></p>
+{% endblock %}

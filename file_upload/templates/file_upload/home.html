@@ -1,0 +1,21 @@
+{% extends "file_upload/base.html" %}
+{% load i18n %}
+{% load l10n %}
+{% block content %}
+  <ul>
+    <li>
+      <a href="{% url 'file_upload:file-upload' %}">{% trans "File Upload"  %}</a>
+    </li>
+  </ul>
+
+  <p>{% trans "Uploaded files"  %}</p>
+  <ul>
+    {% for obj in documents %}
+      <li>
+        <a href="{{ obj.location.url }}">{{ obj.location.name }}</a>
+        <small>({% trans "Uploaded at:"  %} {{ obj.created|localize }}) </small>
+
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
