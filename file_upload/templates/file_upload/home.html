@@ -12,7 +12,7 @@
   <ul>
     {% for obj in documents %}
       <li>
-        <a href="{{ obj.location.url }}">{{ obj.location.name }}</a>
+        <a href="{{ obj.file.url }}">{{ obj.file.name }}</a>
         <small>({% trans "Uploaded at:"  %} {{ obj.created|localize }}) </small>
 
       </li>
