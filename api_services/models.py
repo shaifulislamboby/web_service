@@ -15,7 +15,7 @@ class FileDetail(TimeStampedModel):
         ordering = ('-line_length',)
 
     def to_dict(self):
-        return {'id': self.id, 'file_name': self.document.filename(), 'line_length': self.line_length,
+        return {'file_name': self.document.filename(), 'line_length': self.line_length,
                 'most_occurred_letter': self.most_occurred_letter, 'line_number': self.line_number,
                 'line_content': self.line_content}
 
