@@ -2,6 +2,9 @@ import dicttoxml
 from django.http import JsonResponse, HttpResponse
 
 from .data_fetching import get_random_line_from_latest_file as dc
+"""
+Global variable to check the http accept header.
+"""
 
 ACCEPT_JS = ['*/*', 'application/*', 'application/json']
 
