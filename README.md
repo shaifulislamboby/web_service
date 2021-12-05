@@ -14,7 +14,7 @@ To run this codebase, following are needed:
 - but for simplicity I did that.)
 
 ```
-pip install pipenv
+pip3 install pipenv
 ```
 
 
