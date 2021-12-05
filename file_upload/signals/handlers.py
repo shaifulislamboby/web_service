@@ -7,7 +7,16 @@ from ..domain import detail_info_extractor as ds
 
 
 @receiver(post_save, sender=models.Document)
-def set_leaf_user_group(sender, instance, created, **kwargs):
+def save_details_upon_file_save(sender, instance, created, **kwargs):
+    """
+    This signal will parse the file and try to save the line_content,
+    line_length, etc. to file details model.
+    :param sender:
+    :param instance:
+    :param created:
+    :param kwargs:
+    :return:
+    """
     if created:
         file_object = models.Document.objects.latest('created')
         file_context = ds.create_file_content_list(file=file_object.file)
