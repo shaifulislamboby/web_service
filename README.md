@@ -8,8 +8,10 @@
 ### Requirements:
 
 To run this codebase, following are needed:
-- Python 3.7
+- Python 3.7.0
 - pipenv
+- .env file with SECRET_KEY(Nevertheless I just added that in this repo this is not best practice
+- but for simplicity I did that.)
 
 ```
 pip install pipenv
@@ -31,14 +33,23 @@ Then setup Virtual Environment.
 ### Starting
 
 Finally, to start the project run this commands in sequence
+First one might not be needed.
 ```
-pipenv run python manage.py makemigrations --settings=web_service.settings.development
+pipenv run python manage.py makemigrations --settings=web_service.settings.development  
 pipenv run python manage.py migrate --settings=web_service.settings.development
+```
+This will need gnu gettext (>0.15) please install that before running this. You can also
+ignore this command that will only miss the `internationalization` but things will still work.
+link https://stackoverflow.com/questions/38806553/how-to-install-gnu-gettext-0-15-on-windows-so-i-can-produce-po-mo-files-in
+```
 pipenv run python manage.py compilemessages --settings=web_service.settings.development
+```
+
+````
 pipenv run python manage.py runserver --settings=web_service.settings.development
 ```
 
-Then u can upload txt file browsing
+Then you can upload txt file browsing homepage on this address
 
 ```
 http://localhost:8000/
