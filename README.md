@@ -36,7 +36,10 @@ pipenv run python manage.py runserver --settings=web_service.settings.developmen
 
 
 ### Testing
-Need to write unittests according to the requirements.
+For running tests please run 
+```
+pipenv run python  manage.py test  api_services.tests --settings=web_service.settings.development
+```
 
 ---
 
