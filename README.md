@@ -44,8 +44,8 @@ link https://stackoverflow.com/questions/38806553/how-to-install-gnu-gettext-0-1
 ```
 pipenv run python manage.py compilemessages --settings=web_service.settings.development
 ```
-
-````
+For running the web service ---
+```
 pipenv run python manage.py runserver --settings=web_service.settings.development
 ```
 
@@ -59,11 +59,23 @@ That will save the data and parse the file if possible to another model with
 detail information. If you uploaded a valid txt file and the system has parsed it then 
 you can access the endpoints for the info.
 
+Access random line with extra infos, and 
+this endpoint accepts 3 types of header
 ```
-    http://localhost:8000/one-random-line/
-    http://localhost:8000/one-random-line-backwards/
-    http://localhost:8000/hundreds-longest-lines/
-    http://localhost:8000/twenty-longest-lines/
+http://localhost:8000/one-random-line/
+```
+Access random line backwards --
+```
+http://localhost:8000/one-random-line-backwards/
+```
+This endpoint will return 100 longest line if available,
+if not will return whatever available
+```
+http://localhost:8000/hundreds-longest-lines/
+```
+same as 100 lines it will return 20 lines.
+```
+http://localhost:8000/twenty-longest-lines/
 ```
 You can use postman or other services as per your preference.
 
