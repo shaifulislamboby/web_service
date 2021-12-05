@@ -3,6 +3,7 @@ import uuid
 
 from django.db import models
 from model_utils.models import TimeFramedModel, TimeStampedModel
+from django.utils.translation import ugettext_lazy as _
 
 
 class Document(TimeFramedModel, TimeStampedModel):
@@ -18,8 +19,8 @@ class Document(TimeFramedModel, TimeStampedModel):
     of auto generated integer id.
     """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    description = models.CharField(max_length=255, blank=True, null=True)
-    file = models.FileField(upload_to='file_upload_assets/')
+    description = models.CharField(_('description'), max_length=255, blank=True, null=True)
+    file = models.FileField(_('file'), upload_to='file_upload_assets/')
 
     def filename(self):
         return os.path.basename(self.file.name)

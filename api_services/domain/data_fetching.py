@@ -1,6 +1,6 @@
 from api_services.models import FileDetail
 from file_upload.models import Document
-from django.utils.translation import gettext as _
+from django.utils.translation import ugettext as _
 
 
 def fetch_all_entries_from_latest_file():
