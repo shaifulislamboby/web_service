@@ -1,4 +1,3 @@
-
 from rest_framework.test import APITestCase
 from .factories import FileDetailFactory
 from django.urls import reverse
