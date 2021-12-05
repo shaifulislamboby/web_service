@@ -18,10 +18,12 @@ def get_http_accept_list(http_accept):
 
 def check_http_accept_and_create_response_accordingly(accept_list):
     msg = dc()
-    if msg:
+    if isinstance(msg, dict):
         if any(value in ACCEPT_JS for value in accept_list):
             return JsonResponse(msg)
         elif any(value in ACCEPT_XML for value in accept_list):
             return HttpResponse(dicttoxml.dicttoxml(msg), content_type='application/xml')
         else:
             return HttpResponse(msg.get('line_content'), content_type='text/plain')
+
+    return []

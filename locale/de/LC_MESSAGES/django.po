@@ -1,0 +1,75 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-12-05 12:05+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: api_services/domain/data_fetching.py:22
+msgid "Last file that you uploaded could not be parsed"
+msgstr "Die zuletzt hochgeladene Datei konnte nicht geparst werden"
+
+#: api_services/views.py:10
+msgid "No lines found"
+msgstr "Im datei keine Zeilen gefunden"
+
+#: api_services/views.py:11
+msgid "Server Error"
+msgstr "Server Fehler"
+
+#: api_services/views.py:47
+msgid "random line backward"
+msgstr "Zufallslinie rückwärts"
+
+#: file_upload/forms.py:30
+#, fuzzy
+#| msgid ""
+#| "There is already a file named {file_name} on our system, Please try to "
+#| "upload another file"
+msgid ""
+"There is already a file with same name on our system, Please try to upload "
+"another file"
+msgstr ""
+"Es gibt bereits eine Datei mit diesem Namen in unserem System. Bitte "
+"versuchen Sie, eine andere Datei hochzuladen"
+
+#: file_upload/models.py:22
+msgid "description"
+msgstr "Beschreibung"
+
+#: file_upload/models.py:23
+msgid "file"
+msgstr "Datei"
+
+#: file_upload/templates/file_upload/file_upload.html:8
+msgid "Upload"
+msgstr "Hochladen"
+
+#: file_upload/templates/file_upload/file_upload.html:11
+msgid "Return to home"
+msgstr "Zurück zur Startseite"
+
+#: file_upload/templates/file_upload/home.html:7
+msgid "File Upload"
+msgstr "Datei Upload"
+
+#: file_upload/templates/file_upload/home.html:11
+msgid "Uploaded files"
+msgstr "Eingeladene Dateien"
+
+#: file_upload/templates/file_upload/home.html:16
+msgid "Uploaded at:"
+msgstr "Hochgeladen am:"

@@ -27,5 +27,5 @@ class DocumentForm(forms.ModelForm):
         """
         file_name = str(self.cleaned_data['file'])
         if Document.objects.filter(file__exact='file_upload_assets/' + file_name).exists():
-            message = _(f'There is already a file named {file_name} on our system, Please try to upload another file')
+            message = _('There is already a file with same name on our system, Please try to upload another file')
             raise ValidationError(message)

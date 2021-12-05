@@ -1,29 +1,28 @@
+from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.utils.translation import ugettext as _
 
 from .domain.helpers import get_http_accept_list as gha, check_http_accept_and_create_response_accordingly as chs
 from .domain.data_fetching import get_random_line_from_latest_file as dc, get_random_line_backward as dbc, \
     get_hundreds_longest_lines as hll, get_twenty_longest_lines_from_latest_file as gll
 
-
-class OneRandomLine(APIView):
-    """
-    As we are keeping this endpoints open we will not add any permission or
-    authentication classes.
-    """
-    permission_classes = []
-    authentication_classes = []
+NO_LINE_MSG = _('No lines found')
+ERROR_MSG = _('Server Error')
 
 
 def get_one_line(request):
     try:
         accept_list = gha(request.META.get('HTTP_ACCEPT'))
         res = chs(accept_list=accept_list)
-        return res
+        if res:
+            print(res)
+            return res
+        return JsonResponse({'msg': NO_LINE_MSG})
     except Exception as error:
         print(error)
-        return Response({'msg': 'Server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return JsonResponse({'msg': ERROR_MSG}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class OneRandomLineBackwards(APIView):
@@ -40,10 +39,10 @@ class OneRandomLineBackwards(APIView):
     def get(request):
         try:
             one_r_line_backward = dbc(dc())
-            return Response({'random line backward': one_r_line_backward})
+            return Response({_('random line backward'): one_r_line_backward})
         except Exception as e:
             print(e)
-            return Response({'msg': 'Server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'msg': ERROR_MSG}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class HundredsLongestLines(APIView):
@@ -62,10 +61,10 @@ class HundredsLongestLines(APIView):
             longest_100_lines = hll()
             if hundreds_longest_line:
                 return Response(longest_100_lines)
-            return Response({'msg': 'No lines found'})
+            return Response({'msg': NO_LINE_MSG})
         except Exception as e:
             print(e)
-            return Response({'msg': 'Server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'msg': ERROR_MSG}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class TwentyLongestLinesOfLastFile(APIView):
@@ -84,10 +83,10 @@ class TwentyLongestLinesOfLastFile(APIView):
             twenty_lines = gll()
             if twenty_lines:
                 return Response(twenty_lines)
-            return Response({'msg': 'No lines found'})
+            return Response({'msg': NO_LINE_MSG})
         except Exception as e:
             print(e)
-            return Response({'msg': 'Server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'msg': ERROR_MSG}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 one_random_line_backwards = OneRandomLineBackwards.as_view()
