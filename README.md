@@ -24,7 +24,7 @@ First clone the repository using
 ```
 $ git clone https://github.com/shaifulislamboby/web_service.git
 ```
-Then setup Virtual Environment.
+Then setup pipenv Environment.
 
 ## Once pipenv is installed you can execute the following command
 `pipenv sync`  This will install all the required package and
