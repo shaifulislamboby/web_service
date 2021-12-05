@@ -7,6 +7,7 @@ from collections import Counter
 class FileDetail:
     """
     for ensuring the data integrity
+    This ensures if the data is properly typed 
     """
     line_content: str
     line_length: int
