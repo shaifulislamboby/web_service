@@ -16,10 +16,7 @@ def get_one_line(request):
     try:
         accept_list = gha(request.META.get('HTTP_ACCEPT'))
         res = chs(accept_list=accept_list)
-        if res:
-            print(res)
-            return res
-        return JsonResponse({'msg': NO_LINE_MSG})
+        return res
     except Exception as error:
         print(error)
         return JsonResponse({'msg': ERROR_MSG}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -39,7 +36,8 @@ class OneRandomLineBackwards(APIView):
     def get(request):
         try:
             one_r_line_backward = dbc(dc())
-            return Response({_('random line backward'): one_r_line_backward})
+            msg = _('random line backward')
+            return Response({msg: one_r_line_backward})
         except Exception as e:
             print(e)
             return Response({'msg': ERROR_MSG}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

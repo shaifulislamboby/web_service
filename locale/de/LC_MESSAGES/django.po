@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-05 12:05+0000\n"
+"POT-Creation-Date: 2021-12-05 13:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,15 +22,7 @@ msgstr ""
 msgid "Last file that you uploaded could not be parsed"
 msgstr "Die zuletzt hochgeladene Datei konnte nicht geparst werden"
 
-#: api_services/views.py:10
-msgid "No lines found"
-msgstr "Im datei keine Zeilen gefunden"
-
-#: api_services/views.py:11
-msgid "Server Error"
-msgstr "Server Fehler"
-
-#: api_services/views.py:47
+#: api_services/views.py:41
 msgid "random line backward"
 msgstr "Zufallslinie rückwärts"
 
@@ -73,3 +65,9 @@ msgstr "Eingeladene Dateien"
 #: file_upload/templates/file_upload/home.html:16
 msgid "Uploaded at:"
 msgstr "Hochgeladen am:"
+
+#~ msgid "No lines found"
+#~ msgstr "Im datei keine Zeilen gefunden"
+
+#~ msgid "Server Error"
+#~ msgstr "Server Fehler"

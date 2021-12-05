@@ -9,6 +9,8 @@ python-decouple = "*"
 django-model-utils = "*"
 djangorestframework = "*"
 dicttoxml = "*"
+factory-boy = "*"
+pytest = "*"
 
 [dev-packages]
 
