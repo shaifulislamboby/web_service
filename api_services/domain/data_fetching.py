@@ -7,7 +7,7 @@ from file_upload.models import Document
 from django.utils.translation import ugettext as _
 
 
-def get_random_line_from_latest_file():
+def get_random_line_from_latest_file(*args, **kwargs):
     """
     This function will return one random line from last
     added file, given that the file is a txt file.
@@ -21,8 +21,7 @@ def get_random_line_from_latest_file():
 
 def get_random_line_backward(line_dict) -> str:
     if isinstance(line_dict, dict):
-        __line = reversed(line_dict.get('line_content').split(' '))
-        return ' '.join(__line)
+        return ' '.join(reversed(line_dict.get('line_content').split(' ')))
     return line_dict
 
 
