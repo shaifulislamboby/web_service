@@ -7,6 +7,7 @@ from collections import Counter
 class FileDetail:
     """
     for ensuring the data integrity
+    This ensures if the data is properly typed 
     """
     line_content: str
     line_length: int
@@ -77,4 +78,6 @@ def find_most_occurred_letter(line: str) -> str:
     :return:
     """
     word_dict = Counter(line)
+    if ' ' in word_dict:
+        del word_dict[' ']
     return max(word_dict, key=word_dict.get)
