@@ -1,3 +1,5 @@
+from django.forms import model_to_dict
+
 from api_services.models import FileDetail
 from file_upload.models import Document
 from django.utils.translation import ugettext as _
@@ -20,7 +22,7 @@ def get_random_line_from_latest_file():
     file_details = fetch_all_entries_from_latest_file()
     if not file_details:
         return _('Last file that you uploaded could not be parsed')
-    return file_details.order_by('?').first().to_dict()
+    return model_to_dict(file_details.order_by('?').first())
 
 
 def get_random_line_backward(line_dict) -> str:
