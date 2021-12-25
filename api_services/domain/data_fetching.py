@@ -25,7 +25,7 @@ def get_random_line_from_latest_file():
     file_details = fetch_all_entries_from_latest_file()
     if not file_details:
         return _('Last file that you uploaded could not be parsed')
-    return model_to_dict(file_details.order_by('?').first())
+    return file_details.order_by('?').first().to_dict()
 
 
 def get_random_line_backward(line_dict) -> str:
@@ -39,7 +39,7 @@ def get_x_longest_lines(number_of_lines: int) -> dict:
     try:
         largest_lines = FileDetail.objects.all().values('line_content')[:number_of_lines]
         if largest_lines:
-            return {[str(index)]: line.get('line_content') for index, line in enumerate(largest_lines)}
+            return {str(index): line.get('line_content') for index, line in enumerate(largest_lines)}
         return {}
     except ObjectDoesNotExist as error:
         print(error)
