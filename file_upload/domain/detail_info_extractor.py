@@ -78,4 +78,6 @@ def find_most_occurred_letter(line: str) -> str:
     :return:
     """
     word_dict = Counter(line)
+    if ' ' in word_dict:
+        del word_dict[' ']
     return max(word_dict, key=word_dict.get)
