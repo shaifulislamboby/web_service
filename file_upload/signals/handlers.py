@@ -28,3 +28,5 @@ def save_details_upon_file_save(sender, instance, created, **kwargs):
                                                  line_length=file_detail.line_length,
                                                  most_occurred_letter=file_detail.most_occurred_letter,
                                                  )
+            file_object.status = file_object.STATUS.PARSED
+            file_object.save()
