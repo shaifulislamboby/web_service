@@ -42,8 +42,7 @@ def create_file_content_list(file) -> list:
     file_content_list = []
     if check_txt_file(file):
         try:
-            lines = file.readlines()
-            for index, line in enumerate(lines):
+            for index, line in enumerate(file.readlines()):
                 """As data is being transmitted in byte, to 
                     convert it to string we need to decode,strip has been used for removing newlines """
                 line = line.decode('utf-8').strip()
