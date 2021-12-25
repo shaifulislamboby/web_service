@@ -6,7 +6,7 @@ from django.utils.translation import ugettext as _
 
 from .domain.helpers import get_http_accept_list as gha, check_http_accept_and_create_response_accordingly as chs
 from .domain.data_fetching import get_random_line_from_latest_file as dc, get_random_line_backward as dbc, \
-    get_hundreds_longest_lines as hll, get_twenty_longest_lines_from_latest_file as gll
+    get_x_longest_lines as glx
 
 NO_LINE_MSG = _('No lines found')
 ERROR_MSG = _('Server Error')
@@ -56,7 +56,7 @@ class HundredsLongestLines(APIView):
     @staticmethod
     def get(request):
         try:
-            longest_100_lines = hll()
+            longest_100_lines = glx(100)
             if hundreds_longest_line:
                 return Response(longest_100_lines)
             return Response({'msg': NO_LINE_MSG})
@@ -78,7 +78,7 @@ class TwentyLongestLinesOfLastFile(APIView):
     @staticmethod
     def get(request):
         try:
-            twenty_lines = gll()
+            twenty_lines = glx(20)
             if twenty_lines:
                 return Response(twenty_lines)
             return Response({'msg': NO_LINE_MSG})
