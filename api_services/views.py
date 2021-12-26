@@ -4,9 +4,10 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.utils.translation import ugettext as _
 
-from .domain.helpers import get_http_accept_list as gha, check_http_accept_and_create_response_accordingly as chs
-from .domain.data_fetching import get_random_line_from_latest_file as dc, get_random_line_backward as dbc, \
-    get_x_longest_lines as glx
+from .domain.helpers import get_http_accept_list as ghl, check_http_accept_and_create_response_accordingly as cha
+from .domain.data_fetching import get_random_line_from_latest_file as grf, get_random_line_backward as grb, \
+    get_x_longest_lines as gxl
+
 
 NO_LINE_MSG = _('No lines found')
 ERROR_MSG = _('Server Error')
@@ -14,9 +15,7 @@ ERROR_MSG = _('Server Error')
 
 def get_one_line(request):
     try:
-        accept_list = gha(request.META.get('HTTP_ACCEPT'))
-        res = chs(accept_list=accept_list)
-        return res
+        return cha(accept_list=ghl(request.META.get('HTTP_ACCEPT')))
     except Exception as error:
         print(error)
         return JsonResponse({'msg': ERROR_MSG}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -35,7 +34,7 @@ class OneRandomLineBackwards(APIView):
     @staticmethod
     def get(request):
         try:
-            one_r_line_backward = dbc(dc())
+            one_r_line_backward = grb(grf())
             msg = _('random line backward')
             return Response({msg: one_r_line_backward})
         except Exception as e:
@@ -56,8 +55,8 @@ class HundredsLongestLines(APIView):
     @staticmethod
     def get(request):
         try:
-            longest_100_lines = glx(100)
-            if hundreds_longest_line:
+            longest_100_lines = gxl(100)
+
                 return Response(longest_100_lines)
             return Response({'msg': NO_LINE_MSG})
         except Exception as e:
@@ -78,7 +77,7 @@ class TwentyLongestLinesOfLastFile(APIView):
     @staticmethod
     def get(request):
         try:
-            twenty_lines = glx(20)
+            twenty_lines = gxl(20)
             if twenty_lines:
                 return Response(twenty_lines)
             return Response({'msg': NO_LINE_MSG})
