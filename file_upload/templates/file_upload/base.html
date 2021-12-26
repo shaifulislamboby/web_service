@@ -1,11 +1,26 @@
 <!DOCTYPE html>
+{% load i18n %}
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <title>Simple File Upload</title>
-  </head>
-  <body>
-    {% block content %}
-    {% endblock %}
-  </body>
+</head>
+<form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+    <input name="next" type="hidden" value="{{ redirect_to }}">
+    <select name="language">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                {{ language.name_local }} ({{ language.code }})
+            </option>
+        {% endfor %}
+    </select>
+    <input type="submit" value={% trans "Go" %}>
+</form>
+<body>
+{% block content %}
+{% endblock %}
+</body>
 </html>
