@@ -8,6 +8,7 @@ from .domain.helpers import get_http_accept_list as ghl, check_http_accept_and_c
 from .domain.data_fetching import get_random_line_from_latest_file as grf, get_random_line_backward as grb, \
     get_x_longest_lines as gxl
 
+
 NO_LINE_MSG = _('No lines found')
 ERROR_MSG = _('Server Error')
 
@@ -55,7 +56,7 @@ class HundredsLongestLines(APIView):
     def get(request):
         try:
             longest_100_lines = gxl(100)
-            if hundreds_longest_line:
+
                 return Response(longest_100_lines)
             return Response({'msg': NO_LINE_MSG})
         except Exception as e:
