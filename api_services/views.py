@@ -56,7 +56,7 @@ class HundredsLongestLines(APIView):
     def get(request):
         try:
             longest_100_lines = gxl(100)
-
+            if longest_100_lines:
                 return Response(longest_100_lines)
             return Response({'msg': NO_LINE_MSG})
         except Exception as e:
