@@ -1,8 +1,10 @@
+from import_export.admin import ImportExportModelAdmin
+
 from django.contrib import admin
 from file_upload import models as m
 
 
-class DocumentAdmin(admin.ModelAdmin):
+class DocumentAdmin(ImportExportModelAdmin):
     """
     Making file field readonly in the Django admin interface,
     As we are saving the file details once any Document object

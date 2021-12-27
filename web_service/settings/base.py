@@ -14,6 +14,7 @@ from decouple import config
 import logging
 
 from django.utils.translation import gettext_lazy as _
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -34,6 +35,8 @@ INSTALLED_APPS = [
     'file_upload',
     'api_services',
     'rest_framework',
+    'drf_spectacular',
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -47,7 +50,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
 ]
-
 
 ROOT_URLCONF = 'web_service.urls'
 
@@ -73,11 +75,27 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Web Service API',
+    'VERSION': '1.0.1',
+    # Subject to change
+    'APPEND_COMPONENTS': {
+        'securitySchemes': {'POSAPITokenPermission':
+                                {'type': 'apiKey',
+                                 'in': 'header',
+                                 'name': 'X-MERCHANT-KEY'}
+                            }
+    },
+    'SECURITY': [{'POSAPITokenPermission': [], }],
+    'SERVE_PERMISSIONS': [],
+    'SERVE_AUTHENTICATION': []
 }
 
 WSGI_APPLICATION = 'web_service.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -88,7 +106,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -107,7 +124,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -142,16 +158,15 @@ LOGGING = {
             'filename': os.path.join(BASE_DIR, 'web_service.log'),
             'formatter': 'verbose',
         },
-        'console': {
-            'level': 'DEBUG',  # this level or higher goes to the console
-            'class': 'logging.StreamHandler',
-        },
-
+        # 'console': {
+        #     'level': 'DEBUG',  # this level or higher goes to the console
+        #     'class': 'logging.StreamHandler',
+        # },
 
     },
     'loggers': {
         'django': {
-            'handlers': ['file', 'console'],
+            'handlers': ['file',],
             'level': 'DEBUG',
             'propagate': True,
         },
@@ -166,7 +181,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -180,5 +194,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
