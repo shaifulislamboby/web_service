@@ -14,7 +14,7 @@ class DocumentAdmin(admin.ModelAdmin):
 
     def has_add_permission(self, request, obj=None):
         """
-        Overloading the add new instance permission.
+        Overriding the add new instance permission.
         As we only want to add new files via Django form
         :param request:
         :param obj:
