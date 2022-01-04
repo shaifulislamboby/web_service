@@ -14,7 +14,11 @@ def get_random_line_from_latest_file(*args, **kwargs):
     :return:
     """
     try:
-        return Document.objects.latest('created').file_detail.order_by('?').first().to_dict()
+        one_line = Document.objects.latest('created').file_detail.order_by('?').first()
+        if one_line:
+            return one_line.to_dict()
+        else:
+            return _('Last file that you uploaded could not be parsed')
     except ObjectDoesNotExist:
         return _('Last file that you uploaded could not be parsed')
 

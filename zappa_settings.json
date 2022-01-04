@@ -1,0 +1,23 @@
+{
+    "dev_settings": {
+        "profile_name": "default",
+        "project_name": "web-service",
+        "runtime": "python3.7",
+        "s3_bucket": "leaflabs-magdeburg",
+        "aws_region": "eu-central-1",
+  	    "timeout_seconds": 300,
+  	    "exclude": ["static", "*.js", "*.png", "*.svg", "*.PNG", "*.jpg",
+  	             ".env", ".gitignore", ".github", "__pycache__", "*.pdf", "./staticfiles",
+		     "*.po", "boto3*", "botocore*", "qrcodes", "merchant_assets"],
+
+    },
+    "deployment": {
+        "aws_region": "eu-central-1",
+        "extends": "dev_settings",
+        "django_settings":"web_service.settings.production",
+        "vpc_config" : {
+            "SubnetIds": [ "subnet-0c07e03a0b92a7a75","subnet-021c31b2d1f8f91f1" ], // use the private subnet
+            "SecurityGroupIds": [ "sg-0d20871db9f88357f" ]
+        }
+    },
+}

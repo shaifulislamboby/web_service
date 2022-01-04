@@ -30,14 +30,25 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'file_upload',
     'api_services',
+
+]
+
+THIRD_PARTY_APPS = [
     'rest_framework',
     'drf_spectacular',
     'import_export',
+    'django_hosts',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 ]
+
+INSTALLED_APPS += THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -48,10 +59,21 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_hosts.middleware.HostsResponseMiddleware',
 
 ]
 
 ROOT_URLCONF = 'web_service.urls'
+ROOT_HOSTCONF = 'web_service.hosts'
+DEFAULT_HOST = 'www'
+
+EMAIL_BACKEND = 'anymail.backends.mailjet.EmailBackend'
+DEFAULT_FROM_EMAIL = "WEB <salamaee2@gmail.com>"
+SERVER_EMAIL = "WEB <salamaee2@gmail.com>"
+ANYMAIL = {
+    'MAILJET_API_KEY': config('MAILJET_API_KEY'),
+    'MAILJET_SECRET_KEY': config('MAILJET_API_SECRET')
+}
 
 TEMPLATES = [
     {
@@ -123,6 +145,11 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 # Internationalization

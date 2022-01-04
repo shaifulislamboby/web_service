@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.utils.translation import ugettext as _
+from rest_framework.generics import ListCreateAPIView
 
 from .domain.helpers import get_http_accept_list as ghl, check_http_accept_and_create_response_accordingly as cha
 from .domain.data_fetching import get_random_line_from_latest_file as grf, get_random_line_backward as grb, \

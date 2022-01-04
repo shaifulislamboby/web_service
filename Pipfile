@@ -12,6 +12,14 @@ dicttoxml = "*"
 factory-boy = "*"
 drf-spectacular = "*"
 django-import-export = "*"
+django-hosts = "*"
+pygments = "*"
+django-allauth = "*"
+django-mailjet = "*"
+django-anymail = "*"
+zappa = "*"
+boto3 = "*"
+django-storages = "*"
 
 [dev-packages]
 
