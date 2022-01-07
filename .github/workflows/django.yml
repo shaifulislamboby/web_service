@@ -29,5 +29,10 @@ jobs:
         pipenv install --dev
     - name: Run Tests
       run: |
-        pipenv run python  manage.py test  api_services.tests --settings web_service.settings.production
+        pipenv run python  manage.py test  api_services.tests --settings web_service.settings.development
+      env:
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        MAILJET_API_KEY: ${{ secrets.MAILJET_API_KEY }}
+        MAILJET_API_SECRET: ${{ secrets.MAILJET_API_SECRET }}
+        DB_NAME: ${{ secrets.DB_NAME }}
 
