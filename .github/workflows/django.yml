@@ -30,4 +30,6 @@ jobs:
     - name: Run Tests
       run: |
         pipenv run python  manage.py test  api_services.tests --settings web_service.settings.production
+      env:
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
