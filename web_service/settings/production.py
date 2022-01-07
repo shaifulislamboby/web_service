@@ -31,3 +31,5 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 PUBLIC_MEDIA_LOCATION = 'media'
 MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
 DEFAULT_FILE_STORAGE = 'web_service.storage_backends.MediaStorage'
+AWS_QUERYSTRING_AUTH = False
+CORS_ALLOW_CREDENTIALS = True
