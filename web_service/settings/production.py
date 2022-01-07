@@ -15,7 +15,7 @@ DATABASES = {
 
 ALLOWED_HOSTS = ['*']
 
-AWS_STORAGE_BUCKET_NAME = config('S3_BUCKET_NAME')
+AWS_STORAGE_BUCKET_NAME = 'my-awesome-zappa-bucket-1'
 AWS_S3_REGION_NAME = 'eu-central-1'
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com'
 AWS_DEFAULT_ACL = None
@@ -31,3 +31,5 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 PUBLIC_MEDIA_LOCATION = 'media'
 MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
 DEFAULT_FILE_STORAGE = 'web_service.storage_backends.MediaStorage'
+AWS_QUERYSTRING_AUTH = False
+CORS_ALLOW_CREDENTIALS = True
