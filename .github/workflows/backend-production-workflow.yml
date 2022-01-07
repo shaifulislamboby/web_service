@@ -55,7 +55,7 @@ jobs:
         pipenv run aws configure set region eu-central-1 --profile web
         pipenv run aws configure set output text --profile web
         pipenv run aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }} --profile web
-        pipenv run aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }} --web
+        pipenv run aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }} --profile web
 
     - name: Configure AWS Credentials for collectstatic
       uses: aws-actions/configure-aws-credentials@v1
