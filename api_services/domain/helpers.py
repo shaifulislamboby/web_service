@@ -18,7 +18,7 @@ def get_http_accept_list(http_accept):
             accept.append(i.split(';')[0])
             accept.remove(i)
         return accept
-    except Exception as error:
+    except AttributeError as error:
         print(error)
         return ['*/*']
 

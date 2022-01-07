@@ -1,11 +1,13 @@
 from django.core.exceptions import ValidationError
 from django import forms
+from django.core.mail import send_mail
 from django.utils.translation import ugettext as _
 
 from .models import Document
 
 
 class DocumentForm(forms.ModelForm):
+
     class Meta:
         """
         Form class which will be shown for the file upload
@@ -29,3 +31,4 @@ class DocumentForm(forms.ModelForm):
         if Document.objects.filter(file__exact='file_upload_assets/' + file_name).exists():
             message = _('There is already a file with same name on our system, Please try to upload another file')
             raise ValidationError(message)
+
