@@ -2,7 +2,7 @@
     "dev": {
         "aws_region": "eu-central-1",
         "django_settings": "web_service.settings.production",
-        "profile_name": "default",
+        "profile_name": "web",
         "project_name": "webservice",
         "runtime": "python3.7",
         "s3_bucket": "my-awesome-zappa-bucket-1",
