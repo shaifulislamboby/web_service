@@ -1,0 +1,81 @@
+name: web_service-deploy-production
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+    SECRET_KEY: placeholder
+    MAILJET_API_KEY: placeholder
+    MAILJET_API_SECRET: placeholder
+    TABSCANNER_API_KEY: placeholder
+    QRMONKEY_API_KEY: placeholder
+    DATABASE_USER: postgres
+    DATABASE_PASSWORD: postgres
+    NEW_RECEIPT_NOTIFICATION_HANDLER: placeholder
+    RECEIPT_NOTIFICATION_SERVICE_URL: placeholder
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: ${{ env.DATABASE_USER }}
+          POSTGRES_PASSWORD: ${{ env.DATABASE_PASSWORD }}
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    
+    - name: Install required libraries
+      run: |
+        sudo apt-get install gettext libpq-dev -y
+        pip install pipenv
+
+    - name: Install dependencies
+      run: |
+        pipenv run pip install "setuptools<58"
+        pipenv install --dev
+
+    - name: Configure AWS Credentials for Zappa
+      run: |
+        pipenv run aws configure set region eu-central-1 --profile dev
+        pipenv run aws configure set output text --profile dev
+        pipenv run aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }} --profile dev
+        pipenv run aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }} --profile dev
+
+    - name: Configure AWS Credentials for collectstatic
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-central-1
+
+    - name: Compile translations
+      run: |
+        pipenv run python manage.py compilemessages -l en -l de --settings web_service.settings.production
+        find ./locale/ -name "*.po" -type f -delete
+
+
+    - name: WebService deployment
+      run: |
+        DEPLOYMENT_TARGET='dev'
+        pipenv uninstall --all-dev > /dev/null 2>&1
+        pipenv run zappa update $DEPLOYMENT_TARGET 
+        pipenv run zappa manage $DEPLOYMENT_TARGET migrate
+        pipenv run python manage.py collectstatic --noinput --settings web_service.settings.production
+      env:
+        S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}

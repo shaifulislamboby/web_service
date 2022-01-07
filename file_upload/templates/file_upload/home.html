@@ -10,6 +10,7 @@
 
   <p>{% trans "Uploaded files"  %}</p>
   <ul>
+  {% if documents %}
     {% for obj in documents %}
       <li>
         <a href="{{ obj.file.url }}">{{ obj.file.name }}</a>
@@ -17,5 +18,6 @@
 
       </li>
     {% endfor %}
+  {% endif %}
   </ul>
 {% endblock %}

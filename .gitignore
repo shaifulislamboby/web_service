@@ -27,3 +27,6 @@ venv.bak/
 
 # media assest
 media
+
+# Environment files
+.env
