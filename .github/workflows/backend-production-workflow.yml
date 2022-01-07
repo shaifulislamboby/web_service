@@ -73,8 +73,10 @@ jobs:
     - name: WebService deployment
       run: |
         DEPLOYMENT_TARGET='dev'
+        export VIRTUAL_ENV="$(pipenv --venv)"
         pipenv uninstall --all-dev > /dev/null 2>&1
-        pipenv run zappa update $DEPLOYMENT_TARGET 
+        pipenv run zappa update $DEPLOYMENT_TARGET
+        pipenv run zappa unschedule $DEPLOYMENT_TARGET
         pipenv run zappa manage $DEPLOYMENT_TARGET migrate
         pipenv run python manage.py collectstatic --noinput --settings web_service.settings.production
       env:
