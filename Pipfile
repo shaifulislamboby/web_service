@@ -4,7 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
 python-decouple = "*"
 django-model-utils = "*"
 djangorestframework = "*"
@@ -17,9 +16,13 @@ pygments = "*"
 django-allauth = "*"
 django-mailjet = "*"
 django-anymail = "*"
-zappa = "*"
 boto3 = "*"
 django-storages = "*"
+zappa-django-utils = "*"
+django = "~=2.2"
+awscli = "*"
+aws-psycopg2 = "*"
+zappa = "==0.54.0"
 
 [dev-packages]
 

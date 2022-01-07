@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'file_upload',
+    'file_upload.apps.FileUploadConfig',
     'api_services',
 
 ]
@@ -46,6 +46,7 @@ THIRD_PARTY_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'zappa_django_utils',
 ]
 
 INSTALLED_APPS += THIRD_PARTY_APPS
@@ -122,12 +123,6 @@ WSGI_APPLICATION = 'web_service.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -193,7 +188,7 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': ['file',],
+            'handlers': ['file', ],
             'level': 'DEBUG',
             'propagate': True,
         },
