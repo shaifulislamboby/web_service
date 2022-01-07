@@ -29,4 +29,4 @@ jobs:
         pipenv install --dev
     - name: Run Tests
       run: |
-        pipenv run python  manage.py test  api_services.tests --settings=web_service.settings.development
+        pipenv run python  manage.py test  api_services.tests --settings web_service.settings.production
