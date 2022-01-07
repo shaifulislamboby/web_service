@@ -20,8 +20,7 @@ boto3 = "*"
 django-storages = "*"
 zappa-django-utils = "*"
 django = "~=2.2"
-awscli = "*"
-aws-psycopg2 = "*"
+psycopg2-binary = "==2.8.6"
 zappa = "==0.54.0"
 
 [dev-packages]
