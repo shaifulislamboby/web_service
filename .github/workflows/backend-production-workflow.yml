@@ -68,6 +68,8 @@ jobs:
       run: |
         pipenv run python manage.py compilemessages -l en -l de --settings web_service.settings.production
         find ./locale/ -name "*.po" -type f -delete
+      env:
+        S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
 
 
     - name: WebService deployment
